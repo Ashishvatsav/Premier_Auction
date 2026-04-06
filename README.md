@@ -1,46 +1,93 @@
-🚀 Premier Auction
+🚀 Premier Auction Platform
 
-A full-stack Auction Bidding Platform where users can list products, place bids, and manage their watchlist in real-time.
+A scalable full-stack Auction Bidding System built with modern web technologies, enabling users to create auctions, place bids, and manage personalized watchlists with secure authentication.
+
+⸻
+
+🧠 System Overview
+
+Premier Auction follows a decoupled architecture, where the frontend and backend are independently developed and communicate via REST APIs.
+
+⸻
+
+🏗️ Architecture Diagram (Conceptual)
+
+User (Browser)
+      ↓
+Frontend (React + Vite)
+      ↓ REST API (HTTP + JSON)
+Backend (Spring Boot)
+      ↓
+Database (H2 / SQLite / MySQL)
+
+
+⸻
+
+🔄 Application Flow
+
+🔐 Authentication Flow
+	1.	User logs in via frontend
+	2.	Backend validates credentials
+	3.	JWT token is generated
+	4.	Token is stored in frontend (localStorage)
+	5.	All future requests include:
+Authorization: Bearer 
+
+⸻
+
+🛒 Auction Flow
+	1.	User creates a product
+	2.	Frontend sends POST request
+	3.	Backend stores product in DB
+	4.	Products are fetched and displayed on homepage
+
+⸻
+
+🔨 Bidding Flow
+	1.	User enters bid amount
+	2.	Frontend sends bid request
+	3.	Backend validates:
+	•	bid > current price
+	4.	Updates highest bid in DB
+
+⸻
+
+⭐ Watchlist Flow
+	1.	User clicks “Add to Watchlist”
+	2.	Request sent to backend
+	3.	Backend stores mapping (user ↔ product)
+	4.	Watchlist retrieved via API
 
 ⸻
 
 📌 Features
-
-🔐 Authentication
-	•	User Registration & Login
-	•	JWT-based Authentication
-	•	Secure API access
-
-🛒 Auction System
-	•	Create auction products
-	•	View all listed products
-	•	Delete own products
-
-🔨 Bidding System
-	•	Place bids on products
-	•	Real-time highest bid updates
-
-⭐ Watchlist
-	•	Add products to watchlist
-	•	Track favorite auctions
+	•	🔐 JWT Authentication & Authorization
+	•	🛒 Product/Auction Management
+	•	🔨 Real-time Bid Placement Logic
+	•	⭐ Personalized Watchlist
+	•	🗑️ Ownership-based Product Deletion
+	•	🔗 REST API Integration
+	•	⚡ Fast UI with Vite
 
 ⸻
 
-🏗️ Tech Stack
+🧰 Tech Stack
 
 🎨 Frontend
 	•	React (TypeScript)
 	•	Vite
 	•	Tailwind CSS
+	•	Fetch API
 
 ⚙️ Backend
 	•	Spring Boot
 	•	Spring Security
 	•	JWT Authentication
-	•	JPA / Hibernate
+	•	Spring Data JPA
 
 🗄️ Database
-	•	H2 / SQLite (can be extended to MySQL)
+	•	H2 (Development)
+	•	SQLite / MySQL (Extendable)
 
 ⸻
 
@@ -48,16 +95,28 @@ A full-stack Auction Bidding Platform where users can list products, place bids,
 
 Premier_Auction/
 │
-├── project6th/       # Frontend (React + Vite)
-├── bidkart/          # Backend (Spring Boot)
+├── project6th/        # Frontend Application
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── routes.tsx
+│   │   │   ├── pages/
+│   │   │   └── components/
+│
+├── bidkart/           # Backend Application
+│   ├── src/main/java/com/bidkart/
+│   │   ├── controller/
+│   │   ├── service/
+│   │   ├── repository/
+│   │   └── entity/
+│
 └── README.md
 
 
 ⸻
 
-⚙️ Setup Instructions
+⚙️ Setup & Installation
 
-🔹 1. Clone the repository
+1️⃣ Clone Repository
 
 git clone https://github.com/Ashishvatsav/Premier_Auction.git
 cd Premier_Auction
@@ -65,58 +124,68 @@ cd Premier_Auction
 
 ⸻
 
-🔹 2. Run Backend
+2️⃣ Run Backend
 
 cd bidkart
 ./mvnw spring-boot:run
 
-👉 Runs on:
+Backend runs on:
 
 http://localhost:8080
 
 
 ⸻
 
-🔹 3. Run Frontend
+3️⃣ Run Frontend
 
 cd project6th
 npm install
 npm run dev
 
-👉 Runs on:
+Frontend runs on:
 
 http://localhost:5173
 
 
 ⸻
 
-🔗 API Endpoints (Sample)
+🔗 API Design
 
 Method	Endpoint	Description
 POST	/api/auth/register	Register user
-POST	/api/auth/login	Login user
-GET	/api/products	Get all products
-POST	/api/product	Add product
+POST	/api/auth/login	Login & JWT
+GET	/api/products	Fetch all products
+POST	/api/product	Add new product
+DELETE	/api/product/{id}	Delete product
 POST	/api/bid	Place bid
 POST	/api/watchlist	Add to watchlist
 
 
 ⸻
 
-🔐 Authentication
-	•	JWT Token is generated on login
-	•	Token must be included in headers:
-
-Authorization: Bearer <token>
-
+🔐 Security Design
+	•	JWT-based authentication
+	•	Stateless backend
+	•	Token validation via filter
+	•	Protected routes
 
 ⸻
 
-🎯 Future Improvements
-	•	Real-time bidding (WebSockets)
-	•	Payment integration
-	•	Admin dashboard
-	•	Notifications system
+🚀 Key Highlights
+	•	Decoupled frontend-backend architecture
+	•	RESTful API design
+	•	Secure authentication flow
+	•	Modular and scalable code structure
+	•	Production-ready foundation
+
+⸻
+
+🔮 Future Enhancements
+	•	WebSocket-based real-time bidding
+	•	Payment gateway integration
+	•	Notification system
+	•	Role-based access (Admin/User)
+	•	Deployment (AWS / Docker)
 
 ⸻
 
@@ -126,8 +195,6 @@ Ashish Sreevatsav Nandigam
 
 ⸻
 
-⭐ Acknowledgements
-	•	Spring Boot Documentation
-	•	React & Vite Ecosystem
+📢 Conclusion
 
-⸻
+Premier Auction demonstrates a real-world full-stack system design, focusing on scalability, security, and modular architecture using modern development practices.
