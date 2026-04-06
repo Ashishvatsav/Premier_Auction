@@ -1,9 +1,3 @@
-Here’s a clean, professional README for your project 👇 (just copy & paste into README.md)
-
-⸻
-
-:::writing{variant=“standard” id=“48291”}
-
 🚀 Premier Auction
 
 A full-stack Auction Bidding Platform where users can list products, place bids, and manage their watchlist in real-time.
